@@ -8,7 +8,7 @@
     <input type="text" v-model="newMovieYear"><br>
     <input type="text" v-model="newMovieEnglish"><br>
     
-    <div v-for="movie in movies" v-bind:key="movie">
+    <div v-for="movie in movies" v-bind:key="movie.id">
       <h1>Title: {{movie.title}}</h1>
       <p>Year: {{movie.year}}</p>
       <p>Director: {{movie.director}}</p>
@@ -54,6 +54,8 @@ export default {
       axios.post("api/movies", params).then(response => {
         console.log(response.data);
         this.movies.push(response.data);
+      }).catch(error => {
+        console.log(error.response.data.errors)
       });
     }
   }
